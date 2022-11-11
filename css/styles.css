@@ -1,0 +1,112 @@
+/* ---- Variables de couleur pour thème ---- */
+:root{
+    --playercolor: #000066;
+    --computercolor:#800000;
+}
+
+body {
+    border-radius: border;
+    background-color: #35654d;
+    font-family: 'Sono', sans-serif;
+}
+
+h1 {
+    font-family: 'Alfa Slab One', cursive;
+    font-size: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 10vh;
+}
+
+.wrapper {
+    width: 80%;
+    height: 90vh;
+    font-size: 2rem;
+    display: flex;   
+    flex-wrap: wrap;
+    margin: auto;
+}
+    
+.row_computer, .row_cards, .row_status, .row_player { 
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+
+.tag {
+    border: 3px black solid;
+    border-radius: .5rem;
+    height: 50%;
+    width: 40%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.card {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 3px solid black;
+    border-radius: .5rem;
+    height: 80%;
+    width: 6rem;
+    margin: 2rem;
+    background-color: white;
+    position: relative;
+}
+
+.card:before, .card:after {
+    content: attr(data-value);
+    position: absolute;
+
+}
+
+.card:before {
+    top: .5rem;
+    left: .5rem;
+}
+
+.card:after {
+    bottom: .5rem;
+    right: .5rem;
+
+}
+
+
+.computer {
+    background-color: var(--computercolor);
+    color: white;
+}
+
+.player {
+    background-color: var(--playercolor);
+    color: white;
+}
+
+.status {
+    background-color: #ffcc00;
+}
+
+.play {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #ffcc00;
+    height: 5rem;
+    width: 7rem;
+    border: 3px solid black;
+    border-radius: 50%;
+    position: absolute;
+    right: 5rem;
+}
+
+.play:hover {
+    background-color: var(--computercolor);
+    transform: scale(120%);
+    transition: 1s;
+}
