@@ -2,7 +2,8 @@ const app = {
     init: function() {
         app.generateRandomDeck();
         app.splitDeck();
-        document.addEventListener("click", app.handleClick);
+        document.querySelector("#play").addEventListener("click", app.handleClick);
+        document.querySelector("#auto").addEventListener("click", app.handleAuto);
 
     },
 
@@ -139,13 +140,19 @@ const app = {
         document.querySelector('.nbCardPlayer').textContent = app.playerCardsCounter;
     },
 
-    handleClick() {
+    handleClick: function() {
         app.updateCardsInfo();
         app.gameStatus = app.compareCards(0); 
         console.log(app.computerDeck);
         console.log(app.playerDeck);
         app.updateStatus();
 
+    },
+
+    handleAuto: function() {
+        app.playerCardsCounter = 1;
+        app.computerCardsCounter = 1
+        app.handleClick();
     },
         
 

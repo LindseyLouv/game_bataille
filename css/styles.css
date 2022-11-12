@@ -33,7 +33,7 @@ h1 {
     margin: auto;
 }
     
-.row_computer, .row_cards, .row_status, .row_player { 
+.row_computer, .row_cards, .row_status, .row_player, .row_play{ 
     width: 100%;
     display: flex;
     align-items: center;
@@ -51,6 +51,20 @@ h1 {
     display: flex;
     align-items: center;
     justify-content: center;
+    box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+}
+
+.smallBtn {
+    border: 3px black solid;
+    border-radius: .5rem;
+    height: 2.5rem;
+    width: 7rem;
+    padding: .2rem;
+    margin: 0 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #ffcc00;
     box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
 }
 
@@ -127,18 +141,10 @@ h1 {
     background-color: #ffcc00;
 }
 
-.play {
+.row_play {
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #ffcc00;
-    height: 5rem;
-    width: 7rem;
-    border: 3px solid black;
-    border-radius: 50%;
-    position: absolute;
-    right: 5rem;
-    box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
 }
 
 .play:hover {
