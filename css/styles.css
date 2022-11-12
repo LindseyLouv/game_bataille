@@ -13,15 +13,20 @@ body {
 h1 {
     font-family: 'Alfa Slab One', cursive;
     font-size: 3rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    text-align: center;
     height: 10vh;
+    margin-bottom: 1rem;
+}
+
+.footer {
+    height: 10vh;
+    text-align: center;
+
 }
 
 .wrapper {
     width: 80%;
-    height: 90vh;
+    height: 80vh;
     font-size: 2rem;
     display: flex;   
     flex-wrap: wrap;
@@ -40,11 +45,13 @@ h1 {
 .tag {
     border: 3px black solid;
     border-radius: .5rem;
-    height: 50%;
-    width: 40%;
+    height: 2.5rem;
+    width: 20rem;
+    padding: .2rem;
     display: flex;
     align-items: center;
     justify-content: center;
+    box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
 }
 
 .card {
@@ -53,13 +60,15 @@ h1 {
     justify-content: center;
     border: 3px solid black;
     border-radius: .5rem;
-    height: 80%;
-    width: 6rem;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+    height: 90%;
+    width: 8rem;
     margin: 2rem;
     background-color: white;
     position: relative;
 }
 
+/* card::before et after permettent de générer les valeurs de cartes en haut à gauche et en bas à droite sur les cartes ouvertes */
 .card:before, .card:after {
     content: attr(data-value);
     position: absolute;
@@ -77,15 +86,41 @@ h1 {
 
 }
 
-
-.computer {
+.computer.tag {
     background-color: var(--computercolor);
     color: white;
 }
 
-.player {
+.player.tag {
     background-color: var(--playercolor);
     color: white;
+}
+
+/* .deck et .deck::before permettent de faire la doublure de couleur blanche sur le deck */
+.deck {
+    background-color: white;
+}
+
+.deck::before {
+    content:"";
+    border-radius: .3rem;
+    height: 95%;
+    width: 93%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.player.deck::before {
+    background-color: var(--playercolor);
+}
+.computer.deck::before {
+    background-color: var(--computercolor);
+}
+
+/* classe utilisée pour mettre au nombre de cartes restant dans le deck de passer au premier plan */
+.nbCardLeft {
+    color: white;
+    z-index: 4;
 }
 
 .status {
@@ -103,6 +138,7 @@ h1 {
     border-radius: 50%;
     position: absolute;
     right: 5rem;
+    box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
 }
 
 .play:hover {
