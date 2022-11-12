@@ -118,7 +118,7 @@ h1 {
 }
 
 /* classe utilisée pour mettre au nombre de cartes restant dans le deck de passer au premier plan */
-.nbCardLeft {
+.nbCardComputer, .nbCardPlayer {
     color: white;
     z-index: 4;
 }
@@ -145,4 +145,8 @@ h1 {
     background-color: var(--computercolor);
     transform: scale(120%);
     transition: 1s;
+}
+
+.red {
+    color: red;
 }

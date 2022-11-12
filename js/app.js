@@ -2,6 +2,7 @@ const app = {
     init: function() {
         app.generateRandomDeck();
         app.splitDeck();
+        document.addEventListener("click", app.handleClick);
 
     },
 
@@ -10,6 +11,10 @@ const app = {
     cardValues: [2, 3, 4, 5, 6, 7, 8, 9, 10, "J", "Q", "K", "A"],
     playerDeck: [],
     computerDeck: [],
+    playerCardsCounter: 26,
+    computerCardsCounter: 26,
+    cardCounter: 0,
+    gameStatus: "Click To Play",
 
     generateRandomDeck: function() {
         // génération d'un deck de 52 cartes
@@ -36,12 +41,89 @@ const app = {
             app.playerDeck[i] = app.deckOfCards[i];
             app.computerDeck[i] = app.deckOfCards[i + deckMidpoint];
         }
+    },
 
-        console.log(app.playerDeck);
-        console.log(app.computerDeck);
+    // transforme les faces J, Q, K, A en valeur numérique
+    transformFaceToNumber: function(cardValue) {
+        if (cardValue == 'J') {
+            return 11;
+        } else if (cardValue == 'Q') {
+            return 12;
+        } else if (cardValue == 'K') {
+            return 13;
+        } else if (cardValue == 'A') {
+            return 14;
+        } else if (cardValue == '10') {
+            return 10;
+        } else {
+            return cardValue;
+        }          
+    },
+    
+    compareCards: function(cardNumber) {
+        const playerCard = app.transformFaceToNumber(app.playerDeck[cardNumber].slice(1));
+        const computerCard = app.transformFaceToNumber(app.computerDeck[cardNumber].slice(1));
+        console.log(computerCard);
+        console.log(playerCard);
+
+        if (playerCard > computerCard) {
+            
+            app.playerDeck.push(app.playerDeck[cardNumber]);
+            app.playerDeck.push(app.computerDeck[cardNumber]);
+            app.playerCardsCounter+=2;
+            app.computerCardsCounter-=2;
+            return "Player Won";
+
+        } else if (playerCard < computerCard) {
+            app.computerDeck.push(app.playerDeck[cardNumber]);
+            app.computerDeck.push(app.computerDeck[cardNumber]);
+            app.computerCardsCounter+=2;
+            app.playerCardsCounter-=2;
+            return "Computer Won";
+        } else {
+            return "Draw";
+        }
+    },
+
+    updateGameScreen: function() {
+        computerCard = document.querySelector("#computerCard");
+        playerCard = document.querySelector("#playerCard");
+
+        // affichage nb de cartes decks 
+        document.querySelector('.nbCardComputer').textContent = app. computerCardsCounter;
+        document.querySelector('.nbCardPlayer').textContent = app. playerCardsCounter;
+
+        computerCard.classList.remove("red");
+        playerCard.classList.remove("red");
+
+        // affichage du game status
+        document.querySelector(".status.tag").textContent = app.gameStatus;
+
+        // affichage de la carte computer
+        computerCard.dataset.value = app.computerDeck[app.cardCounter];
+        computerCard.textContent = app.computerDeck[app.cardCounter].slice(0, 1);
+        if (app.computerDeck[app.cardCounter].slice(0, 1) == "♥" || app.computerDeck[app.cardCounter].slice(0, 1) == "♦") {
+            computerCard.classList.add("red");
+
+        }
+
+        // affichage de la carte player
+        playerCard.dataset.value = app.playerDeck[app.cardCounter];
+        playerCard.textContent = app.playerDeck[app.cardCounter].slice(0, 1);
+        if (app.playerDeck[app.cardCounter].slice(0, 1) == "♥" || app.playerDeck[app.cardCounter].slice(0, 1) == "♦") {
+            playerCard.classList.add("red");
+
+        }
+
 
     },
 
+    handleClick() {
+        app.gameStatus = app.compareCards(app.cardCounter); 
+        app.updateGameScreen();
+        app.cardCounter++;
+
+    },
         
 
    
