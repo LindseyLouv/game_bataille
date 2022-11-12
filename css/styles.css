@@ -150,3 +150,22 @@ h1 {
 .red {
     color: red;
 }
+
+/* animation end of game */
+
+@keyframes fadeinandout {
+    from {
+      opacity: 1;
+    }
+    to {
+      opacity: 0;
+    }
+  }
+
+.endofgame {
+    background-color: var(--computercolor);
+    transform: scale(140%);
+    transition: 1s;
+    animation: fadeinandout 1s ease-in-out infinite;
+
+}
