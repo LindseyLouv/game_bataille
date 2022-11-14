@@ -24,8 +24,17 @@
         </div>
 
         <div class="row_status">
-            <div class="tag status">Click To Play</div>
-            <!--<div class="play">Play</div> -->
+            <button class="tag status" id="rules">Rules</button>
+            <div class="rulesBox">
+                <div class="divCloseRules"><button id="closeRules">X</button></div>  
+                <h2>Rules</h2>
+                <ul class="rules">
+                    <li>A deck of 52 cards has been shuffled and dealt equally between players.</li>
+                    <li>Each turn, player will play 1 card, the player with the biggest card takes the oponent's card.</li>
+                    <li>Click on <strong>Play</strong> to play a card.</li>
+                    <li>Click on <strong>End Game</strong> to finish the game in which the next win will determine the Winner.</li>
+                </ul>
+            </div>
         </div>
 
         <div class="row_cards">
@@ -39,10 +48,16 @@
 
         <div class="row_play">
             <button class="smallBtn" id="play">Play</button>
-            <button class="smallBtn" id="auto">End Game</button>
+            <button class="smallBtn" id="endGame">End Game</button>
         </div>
     </div>
-    <footer class="footer"><a href="https://github.com/LindseyLouv">By Lindsey Louv</a></footer>
+    <footer class="footer">
+        <ul>
+            <li><a href="https://github.com/LindseyLouv">By Lindsey Louv - November 2022</a></li>
+            <li><a href="https://github.com/LindseyLouv/game_bataille">GitHub Repository for this project</a></li>
+        </ul>
+    </footer>
+        
     <script src="./js/app.js"></script>
 </body>
 </html>

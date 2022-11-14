@@ -2,8 +2,10 @@ const app = {
     init: function() {
         app.generateRandomDeck();
         app.splitDeck();
-        document.querySelector("#play").addEventListener("click", app.handleClick);
-        document.querySelector("#auto").addEventListener("click", app.handleAuto);
+        document.querySelector("#play").addEventListener("click", app.handlePlay);
+        document.querySelector("#endGame").addEventListener("click", app.handleEndGame);
+        document.querySelector("#rules").addEventListener("click", app.handleRules);
+        document.querySelector("#closeRules").addEventListener("click", app.handleCloseRules);
 
     },
 
@@ -19,8 +21,8 @@ const app = {
 
     generateRandomDeck: function() {
         // génération d'un deck de 52 cartes
-        for (let suitCounter = 0; suitCounter < 4; suitCounter++) {
-            for (let valueCounter = 0; valueCounter < 13; valueCounter++) {
+        for (let suitCounter = 0; suitCounter < app.cardSuits.length; suitCounter++) {
+            for (let valueCounter = 0; valueCounter < app.cardValues.length; valueCounter++) {
                 app.deckOfCards.push(app.cardSuits[suitCounter] + app.cardValues[valueCounter]);
             }
         }
@@ -46,19 +48,12 @@ const app = {
 
     // transforme les faces J, Q, K, A en valeur numérique
     transformFaceToNumber: function(cardValue) {
-        if (cardValue == 'J') {
-            return 11;
-        } else if (cardValue == 'Q') {
-            return 12;
-        } else if (cardValue == 'K') {
-            return 13;
-        } else if (cardValue == 'A') {
-            return 14;
-        } else if (cardValue == '10') {
-            return 10;
-        } else {
-            return cardValue;
-        }          
+        if (cardValue == 'J') return 11;
+        if (cardValue == 'Q') return 12;
+        if (cardValue == 'K') return 13;
+        if (cardValue == 'A') return 14;
+        if (cardValue == '10') return 10;
+        return cardValue;             
     },
     
     compareCards: function(cardNumber) {
@@ -66,7 +61,6 @@ const app = {
         const computerCard = app.transformFaceToNumber(app.computerDeck[cardNumber].slice(1));
 
         let status = "";
-
 
         if (playerCard > computerCard) {
             // on ajoute les cartes au joueur gagnant ici player
@@ -84,7 +78,7 @@ const app = {
             app.playerCardsCounter-=1;
             status = "Computer Won";
         } else {
-            // on rend les cartes aux joueurs
+            // ici on rend les cartes aux joueurs - il faudrait coder le cas concret
             app.playerDeck.push(app.playerDeck[cardNumber]);
             app.computerDeck.push(app.computerDeck[cardNumber]);
             status = "Draw";
@@ -94,19 +88,29 @@ const app = {
         app.playerDeck.splice(cardNumber, 1);
         app.computerDeck.splice(cardNumber, 1);
 
-        // on teste si quelqu'un a gagné
-        if (app.computerCardsCounter == 0) {
-            document.querySelector(".status.tag").classList.add("endofgame");
-            return "You Won!! :)"
-        } else if (app.playerCardsCounter == 0) {
-            document.querySelector(".status.tag").classList.add("endofgame");
-            return "You Lost!! :("
-        }
-
         return status;
         
     },
 
+    // vérifie si quelqu'un a gagné (lorsque l'un des decks passe à 0 cartes)
+    checkWinner: function() {
+        // on teste si quelqu'un a gagné
+        if (app.computerCardsCounter <= 0) {
+            document.getElementById("play").remove();
+            console.log(document.getElementById("play"));
+            document.querySelector("#endGame").textContent = "Replay?";
+            document.querySelector(".status.tag").classList.add("endofgame");
+            app.gameStatus = "You Win!! :)"
+        } else if (app.playerCardsCounter <= 0) {
+            document.getElementById("play").remove();
+            document.querySelector("#endGame").textContent = "Replay?";
+            document.querySelector(".status.tag").classList.add("endofgame");
+            app.gameStatus = "You Loose!! :("
+        }
+        document.querySelector(".status.tag").textContent = app.gameStatus;
+    },
+
+    // met à jour les infos sur les cartes affichées
     updateCardsInfo: function() {
         computerCard = document.querySelector("#computerCard");
         playerCard = document.querySelector("#playerCard");
@@ -131,6 +135,7 @@ const app = {
 
     },
 
+    // gère la maj du status au milieu
     updateStatus: function(){
         // affichage du game status
         document.querySelector(".status.tag").textContent = app.gameStatus;
@@ -140,23 +145,39 @@ const app = {
         document.querySelector('.nbCardPlayer').textContent = app.playerCardsCounter;
     },
 
-    handleClick: function() {
+    // gère l'apparition de la fenêtre Rules
+    handleRules: function() {
+        document.querySelector(".rulesBox").classList.toggle("displayOn");
+    },
+
+    // gère la fermeture de la fenêtre Rules
+    handleCloseRules: function() {
+        document.querySelector(".rulesBox").classList.toggle("displayOn");
+
+    },
+
+    // gère le click du bouton Play
+    handlePlay: function() {
         app.updateCardsInfo();
         app.gameStatus = app.compareCards(0); 
-        console.log(app.computerDeck);
-        console.log(app.playerDeck);
         app.updateStatus();
-
+        app.checkWinner();
+        //console.log(app.computerDeck);
+        //console.log(app.playerDeck);
     },
 
-    handleAuto: function() {
+    // gère le click du bouton EndGame
+    handleEndGame: function() {
+        // rafraichir la page pour rejouer si le jeu est terminé
+        if (app.computerCardsCounter <= 0 || app.playerCardsCounter <= 0 ) {
+            window.location.reload();
+        }
+
+        // petit hack, ici on force les deux joueurs à 1 carte restant et on tire une carte afin de forcer la fin du jeu 
         app.playerCardsCounter = 1;
         app.computerCardsCounter = 1
-        app.handleClick();
-    },
-        
-
-   
+        app.handlePlay();
+    },  
 
 
 }

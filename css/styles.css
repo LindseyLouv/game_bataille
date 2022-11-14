@@ -10,12 +10,25 @@ body {
     font-family: 'Sono', sans-serif;
 }
 
+li {
+    margin: 0.5rem;
+}
+
+strong {
+    font-weight: 800;
+}
+
+
 h1 {
     font-family: 'Alfa Slab One', cursive;
     font-size: 3rem;
     text-align: center;
     height: 10vh;
     margin-bottom: 1rem;
+}
+
+h2 {
+    font-weight: 800;
 }
 
 .footer {
@@ -41,18 +54,57 @@ h1 {
     position: relative;
 }
 
+.rulesBox {
+    position: absolute;
+    border: 3px black solid;
+    background-color: #ffcc00;
+    border-radius: .5rem;
+    width: 400px;
+    height: 400px;
+    z-index: 6;  
+    display: none;  
+}
+
+
+.displayOn {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+
+}
+
+.divCloseRules {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+}
+
+#closeRules {
+    width: 2rem;
+    height: 2rem;    
+
+}
+
+.rules {
+    font-size: 1rem;
+    margin: 2rem;
+}
+
 
 .tag {
     border: 3px black solid;
     border-radius: .5rem;
     height: 2.5rem;
     width: 20rem;
-    padding: .2rem;
+    padding: .4rem;
     display: flex;
     align-items: center;
     justify-content: center;
     box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+    font-size: 2rem;
 }
+
+/* CSS pour les boutons Play et End Game */
 
 .smallBtn {
     border: 3px black solid;
@@ -66,7 +118,39 @@ h1 {
     justify-content: center;
     background-color: #ffcc00;
     box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+    font-size: 1rem;
+    font-weight: 700;
+    position: relative;
+    overflow: hidden;
+    transition: 1s all ease;
+    z-index: 1;
 }
+
+/* CSS pour les animations des boutons Play et End Game */
+
+.smallBtn:hover {
+    color: white;
+    transition: 2s all ease;
+}
+
+.smallBtn::before {
+    content: '';
+    background: var(--computercolor);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: 0.6s all ease;
+    width: 0%;
+    height: 100%;
+    z-index: -1;
+}
+
+.smallBtn:hover::before {
+    width: 100%;
+}
+
+/* CSS pour les cartes */
 
 .card {
     display: flex;
@@ -95,6 +179,7 @@ h1 {
 }
 
 .card:after {
+    rotate: 180deg;
     bottom: .5rem;
     right: .5rem;
 
@@ -171,7 +256,7 @@ h1 {
 .endofgame {
     background-color: var(--computercolor);
     transform: scale(140%);
-    transition: 1s;
-    animation: fadeinandout 1s ease-in-out infinite;
+    transition: 2s;
+    animation: fadeinandout 2s ease-in-out infinite;
 
 }
