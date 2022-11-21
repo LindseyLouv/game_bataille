@@ -1,7 +1,7 @@
 # game_bataille
 War Card Game
 
-![screenshot_warcardgame](https://user-images.githubusercontent.com/113363611/203113750-72edda76-30a8-4d7b-a10f-ada2bc80bc66.png)
+![screenshot_warcardgame](https://user-images.githubusercontent.com/113363611/203114122-4e28bb2c-8d26-4cd0-80c1-5bf780328681.png)
 
 # Try the game 
 https://lindseylouv.github.io/game_bataille/
