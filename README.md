@@ -9,6 +9,7 @@ https://lindseylouv.github.io/game_bataille/
 # How to play?
 
 Press the Play button to play a card
+
 Press the End Game button to finish the game with the next card played
 
 # How was it made?
